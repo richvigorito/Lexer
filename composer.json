@@ -1,0 +1,24 @@
+{
+    "name": "rv/lexer",
+		"type": "library",
+    "description": "Lexical Scanner for parsing lexical grammars.",
+    "license": "GNU",
+    "version": "0.1",
+    "authors": [
+        {
+            "name": "Rich Vigorito",
+            "email": "vigoritor@gmail.com"
+        }
+    ],
+    "require": {
+     "php": ">=5.3.3"
+		},
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "rv\\LexicalScanner\\": "src/"
+        }
+    }
+}
