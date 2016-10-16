@@ -1,6 +1,9 @@
 <?php
 
-require_once('./ExpressionTree.php');
+namespace rv\Lexer;
+
+use ExpressionTree;
+
 
 class LexicalScanner{
 
