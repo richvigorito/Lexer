@@ -63,7 +63,7 @@ class LexicalScanner{
     $line = $tmp_stack->getParseString();
 
 
-    if($line == 'T_EXPR')          return $tmp_stack;
+    if($line == 'T_TERM')          return $tmp_stack;
 
     elseif($line == $stack_string) 
     {
