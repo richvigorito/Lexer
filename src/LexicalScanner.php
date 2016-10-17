@@ -21,7 +21,7 @@ class LexicalScanner{
   {
     try{
       $tokens = explode(' ',$source);       
-      $stack = new ExpressionTree ($tokens);
+      $stack = new \rv\Lexer\ExpressionTree ($tokens);
       return  self::run($stack); 
     } catch (Exception $e){
       print_R([$e,$stack]);

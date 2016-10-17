@@ -12,10 +12,8 @@ class LexerTest extends PHPUnit_Framework_TestCase {
 
   public function testLexicalScanner()
   {
-
-  //print_R(spl_autoload_functions());
         // test to just see can construct a LexicalScanner w/o error
-        $lexer = new \rv\Lexer\LexicalScanner;
+        $lexer = new LexicalScanner;
         $this->assertTrue(1 == true);
   }  
 
