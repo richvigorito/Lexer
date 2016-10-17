@@ -6,7 +6,7 @@ class ExpressionTree {
   
   var $arr ; 
 
-  public function __construct(array $arr=[]){
+  public function __construct(array $arr=array()){
       $this->arr = $arr;
   }
 
