@@ -7,14 +7,13 @@ use rv\Lexer\ExpressionTree;
 
 class LexicalScanner{
 
-  public static $grammars = [];
+  public static $grammars = array();
   public static $debug = false;
 
   function __construct(array $grammars = array(),$debug = false)
   {
       self::$grammars = $grammars;
       self::$debug = $debug;
-      $x = new ExpressionTree ([]);
   }
 
 
@@ -25,7 +24,7 @@ class LexicalScanner{
       $stack = new ExpressionTree ($tokens);
       return  self::run($stack); 
     } catch (Exception $e){
-      print_R([$e,$stack]);
+      print_R(array($e,$stack));
     }
   }
 
@@ -48,7 +47,7 @@ class LexicalScanner{
         } else {
           $sub_array = $stack->getSubArr($start,$length); 
           $sub_stack = new ExpressionTree($sub_array);
-          $tmp_stack->push([$result['token'] => $sub_stack]);
+          $tmp_stack->push(array($result['token'] => $sub_stack));
           $start += $length;
           $no_match = false;
           break;
@@ -68,7 +67,7 @@ class LexicalScanner{
     elseif($line == $stack_string) 
     {
       // @TODO ... better error handling
-      print_r([$tmp_stack,'ERROR']);
+      print_r(array($tmp_stack,'ERROR'));
       exit;
         //throw new Exception ("about to approach infinite recursive loop");
     }
