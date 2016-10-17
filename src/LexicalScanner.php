@@ -2,7 +2,7 @@
 
 namespace rv\Lexer;
 
-use ExpressionTree;
+use rv\Lexer\ExpressionTree;
 
 
 class LexicalScanner{
@@ -14,6 +14,7 @@ class LexicalScanner{
   {
       self::$grammars = $grammars;
       self::$debug = $debug;
+      $x = new ExpressionTree ([]);
   }
 
 
@@ -21,7 +22,7 @@ class LexicalScanner{
   {
     try{
       $tokens = explode(' ',$source);       
-      $stack = new \rv\Lexer\ExpressionTree ($tokens);
+      $stack = new ExpressionTree ($tokens);
       return  self::run($stack); 
     } catch (Exception $e){
       print_R([$e,$stack]);
