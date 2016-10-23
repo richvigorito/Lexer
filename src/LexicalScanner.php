@@ -62,14 +62,20 @@ class LexicalScanner{
     $line = $tmp_stack->getParseString();
 
 
-    if($line == 'T_TERM')          return $tmp_stack;
-
-    elseif($line == $stack_string) 
-    {
-      // @TODO ... better error handling
-      print_r(array($tmp_stack,'ERROR'));
-      exit;
-        //throw new Exception ("about to approach infinite recursive loop");
+    /*
+	recurse until find T_TERM (terminate). 
+	if the $line == $stack_string then we will
+        be in an infinite loop. in such case, catch this,
+	puth the stack in an ERROR key array, hopefully
+	we can still use some of the info 
+   */
+    if($line == 'T_TERM') {          
+	return $tmp_stack;
+    } elseif($line == $stack_string)  {
+		
+      $err_stack = new ExpressionTree;
+      $err_stack->push(array('ERROR' => $sub_stack));
+      return $err_stack;
     }
     return self::run($tmp_stack);
   }
