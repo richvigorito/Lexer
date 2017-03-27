@@ -17,28 +17,18 @@ class LexicalScanner{
   }
 
 
-  public static function parse($source, $debug = 0 )
+  public static function parse($source)
   {
     try{
       $tokens = explode(' ',$source);       
       $stack = new ExpressionTree ($tokens);
-			if ( $debug > 0 ){
-      	$x =  self::run($stack,$debug); 
-				print_r($x);
-				for( $i = 1 ; $i < $debug; $i++){
-      		$x =  self::run($x,$debug); 
-					print_r($x);
-				}
-				exit;
-			} else {
-      	return  self::run($stack); 
-			}
+      return  self::run($stack); 
     } catch (Exception $e){
       print_R(array($e,$stack));
     }
   }
 
-  public static function run($stack, $debug = 0 )
+  public static function run($stack)
   {
     $stack_string = $stack->getParseString();
     $tmp_stack = new ExpressionTree;
@@ -79,12 +69,15 @@ class LexicalScanner{
 	puth the stack in an ERROR key array, hopefully
 	we can still use some of the info 
    */
-    if($line == 'T_TERM' OR $debug) {          
-			return $tmp_stack;
+    if($line == 'T_TERM') {          
+				return $tmp_stack;
     } elseif($line == $stack_string)  {
-		
+			$has_term = $tmp_stack->getNode('T_TERM');	
       $err_stack = new ExpressionTree;
-      $err_stack->push(array('ERROR' => $sub_stack));
+			if(is_array($has_term))
+      	$err_stack->push(array('ERROR' => $sub_stack));
+			else
+      	$err_stack->push(array('ERROR' => $has_term));
       return $err_stack;
     }
     return self::run($tmp_stack);
