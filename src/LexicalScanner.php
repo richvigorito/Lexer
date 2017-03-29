@@ -17,18 +17,29 @@ class LexicalScanner{
   }
 
 
-  public static function parse($source)
+  public static function parse($source, $debug_level = 0)
   {
     try{
       $tokens = explode(' ',$source);       
       $stack = new ExpressionTree ($tokens);
-      return  self::run($stack); 
+
+ 			if ( $debug_level > 0 ){
+				$x =  self::run($stack,$debug_level); 
+				print_r($x);
+ 				for( $i = 1 ; $i < $debug_level; $i++){
+ 					$x =  self::run($x,$debug_level); 
+					print_r($x);
+ 				}
+ 				exit;
+			} else {
+      	return  self::run($stack); 
+			}
     } catch (Exception $e){
       print_R(array($e,$stack));
     }
   }
 
-  public static function run($stack)
+  public static function run($stack, $debug = 0)
   {
     $stack_string = $stack->getParseString();
     $tmp_stack = new ExpressionTree;
@@ -69,7 +80,7 @@ class LexicalScanner{
 	puth the stack in an ERROR key array, hopefully
 	we can still use some of the info 
    */
-    if($line == 'T_TERM') {          
+    if($line == 'T_TERM' or $debug) {          
 				return $tmp_stack;
     } elseif($line == $stack_string)  {
 			$has_term = $tmp_stack->getNode('T_TERM');	
