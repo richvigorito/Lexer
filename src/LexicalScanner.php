@@ -87,8 +87,10 @@ class LexicalScanner{
       $err_stack = new ExpressionTree;
 			if(!empty($has_term))
       	$err_stack->push(array('ERROR' => $has_term));
-			else
+			elseif(!empty($sub_stack))
       	$err_stack->push(array('ERROR' => $sub_stack));
+			else
+      	$err_stack->push(array('ERROR' => $tmp_stack));
       return $err_stack;
     }
     return self::run($tmp_stack);
